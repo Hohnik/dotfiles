@@ -1,5 +1,5 @@
 # ----- Plugins & Settings -----
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting macos z)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting macos)
 
 
 # ----- Shell Settings -----
@@ -13,6 +13,7 @@ source $ZSH/oh-my-zsh.sh
 zstyle ':completion:*' menu select
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export EDITOR="nvim"
+source <(fzf --zsh)
 
 # ----- Alias -----
 alias catcat='bat'
@@ -72,8 +73,34 @@ function cd_command() {
 }
 add-zsh-hook chpwd cd_command
 
-
-
 # ----- *Random Stuff* -----
-venv
+eval "$(zoxide init zsh)"
 
+function z() {
+  if [[ "$#" -eq 0 ]]; then
+    cd ~
+  elif [[ "$#" -eq 1 ]] && { [[ -d "$1" ]] || [[ "$1" = '-' ]] || [[ "$1" =~ ^[-+][0-9]$ ]]; }; then
+    cd "$1"
+  else
+    # Try the standard zoxide query first
+    local result
+    result=$(zoxide query -- "$@" 2>/dev/null)
+    
+    # If standard query fails, fall back to fuzzy finding
+    if [[ -z "$result" ]]; then
+      result=$(zoxide query -l | fzf --query "$*" --select-1 --exit-0 \
+        --height 40% --layout=reverse --border \
+        --prompt="No direct match found. Fuzzy find: ")
+    fi
+    
+    # If we got a result (either way), cd to it
+    [[ -n "$result" ]] && cd "$result"
+  fi
+}
+
+function zi() {
+  local dir
+  dir="$(zoxide query -l | fzf --query "$*" --select-1 --exit-0 \
+    --height 40% --layout=reverse --border \
+    --prompt="Jump to directory > ")" && cd "$dir"
+}

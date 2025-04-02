@@ -1,15 +1,19 @@
 # My Dotfiles
 
 Configuration files managed using [GNU Stow](https://www.gnu.org/software/stow/).
-Install `oh-my-zsh` and 
 
 ## Installation
-
-1.  **Prerequisites:** Ensure you have `git` and `stow` installed.
-    *   *macOS (Homebrew):* `brew install stow`
-    *   *Debian/Ubuntu:* `sudo apt update && sudo apt install stow`
-    *   *Arch Linux:* `sudo pacman -S stow`
-    *   *(Other systems: Check your package manager)*
+1.  **Installed programs**
+    ```bash
+    ./install.sh
+    ```
+    * `homebrew`
+    * `oh-my-zsh`
+    * `zoxide`
+    * `fzf`
+    * `uv`
+    * `lazygit`
+    * `neovim`
 
 2.  **Clone the repository:**
     ```bash
