@@ -1,0 +1,44 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" Source your .vimrc
+" source ~/.vimrc
+
+let mapleader=" "
+
+Plug 'machakann/vim-highlightedyank'
+set commentary
+set showmode
+set incsearch
+set easymotion
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set scrolloff=5
+set history=1000
+set number relativenumber
+set timeoutlen=150
+set ideajoin
+set idearefactormode=keep
+
+" map grn <Action>(RenameElement)
+map <leader>i ~h
+imap JK <Esc>l
+imap Jk <Esc>l
+imap jk <Esc>l
+
+nmap gd :action GotoDeclaration<CR>
+nmap gh <Action>(ShowHoverInfo)
+nmap gn <Action>(RenameElement)
+
+" Put search results in the middle of the screen "
+nnoremap n nzz
+nnoremap N Nzz
+
+" easy tab switching via H and L "
+nmap H gT
+nmap L gt

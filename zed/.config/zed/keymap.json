@@ -1,0 +1,54 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-b": "workspace::ToggleRightDock",
+      "cmd-t": "workspace::ToggleBottomDock"
+      // "cmd-3": "workspace::ToggleLeftDock"
+      // "ctrl-h": "tab_switcher::Toggle",
+      // "shift-l": ["tab_switcher::Toggle", { "select_last": true }]
+      // "shift-h": "menu::SelectNext",
+      // "shift-l": "menu::SelectPrev"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work in normal & visual mode
+      "shift-l": "menu::SelectNext",
+      "shift-h": "menu::SelectPrev"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work only in normal mode
+      // "down": ["workspace::SendKeystrokes", "4 j"]
+      // "up": ["workspace::SendKeystrokes", "4 k"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual && !VimWaiting && !menu",
+    "bindings": {
+      // visual, visual line & visual block modes
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work in insert mode
+      // e.g.
+      "j k": "vim::NormalBefore" // remap jj in insert mode to escape.
+    }
+  },
+  {
+    "context": "Editor && jupyter && !ContextEditor",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-enter": "repl::RunInPlace",
+      "cmd-enter": "repl::Run",
+      "cmd-c": "repl::ClearOutputs"
+      // "cmd-ctrl-enter": "repl::"
+    }
+  }
+]
