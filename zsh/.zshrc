@@ -16,6 +16,8 @@ export EDITOR="nvim"
 source <(fzf --zsh)
 
 # ----- Alias -----
+alias python=python3
+alias pip=pip3
 alias catcat='bat'
 alias showvim='vim $(fzf)'
 alias gs='git status --short'
@@ -29,8 +31,8 @@ alias gitstats='git ls-files | xargs wc -l | column -t'
 
 
 # ----- Path Variables -----
-export PATH=/opt/homebrew/sbin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
+# export PATH=/opt/homebrew/sbin:$PATH
+# export PATH=/opt/homebrew/bin:$PATH
 export PATH="$PATH:/Users/niklas/.modular/bin"
 if [[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
   export PATH="$HOME/.local/bin:$PATH"
@@ -72,6 +74,7 @@ function cd_command() {
   venv
 }
 add-zsh-hook chpwd cd_command
+venv
 
 # ----- *Random Stuff* -----
 eval "$(zoxide init zsh)"
