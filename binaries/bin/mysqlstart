@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+/Applications/XAMPP/xamppfiles/bin/mysql -u root -h localhost
+

@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+file=$1
+
+sed -i '' 's/}//g' "$file"
+sed -i '' 's/;//g' "$file"
+sed -i '' 's/ {/:/g' "$file"
+sed -i '' 's/\/\//#/' "$file"
+sed -i '' 's/let //g' "$file"
+sed -i '' 's/this/self/g' "$file"
+

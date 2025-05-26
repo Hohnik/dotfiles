@@ -15,6 +15,12 @@ zstyle ':completion:*' menu select
 export EDITOR="nvim"
 source <(fzf --zsh)
 
+# ------ carapace autocomplete -------
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
+
 # ----- Alias -----
 alias python=python3
 alias pip=pip3
@@ -107,3 +113,4 @@ function zi() {
     --height 40% --layout=reverse --border \
     --prompt="Jump to directory > ")" && cd "$dir"
 }
+alias lzd='lazydocker'

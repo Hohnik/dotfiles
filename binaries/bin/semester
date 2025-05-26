@@ -1,0 +1,98 @@
+#!/bin/zsh
+
+typeset -A courses
+local semester=""
+local base_dir=""
+
+display_preview() {
+    clear
+    print -P "%F{blue}📚 Semester ${semester} Preview%f"
+    print -P "%F{cyan}Root: ${base_dir}%f\n"
+
+    # Build ASCII tree
+    local tree_lines=("📁 semester${semester}")
+    local i=1
+    for course in "${(@k)courses}"; do
+        local clean_course=${course// /_}
+        local prefix="├──"
+        (( i == ${#courses} )) && prefix="└──"
+        
+        tree_lines+="${prefix} 📖 ${clean_course}"
+        tree_lines+="    ├── 📂 skripte"
+        
+        if [[ ${courses[$course]} == "yes" ]]; then
+            tree_lines+="    └── 📂 praktika"
+        fi
+        
+        ((i++))
+    done
+
+    # Format with indentation
+    print -l ${tree_lines} | 
+        sed '1!s/^/│   /g' |
+        sed 's/├── 📖/├── 📖/g' |
+        sed 's/└── 📖/└── 📖/g'
+    echo "\n"
+}
+
+while true; do
+    echo -n "📆 Enter semester number: "
+    read semester
+    [[ $semester =~ ^[0-9]+$ ]] && break
+    print -P "%F{red}❌ Invalid number!%f"
+done
+
+base_dir="$HOME/Uni/semester${semester}"
+
+while true; do
+    display_preview
+    tput cup $(($(tput lines) - 4)) 0
+    
+    while true; do
+        echo -n "📝 Enter course name (or 'done' to finish): "
+        read course
+        case $course in
+            done) break 2 ;;
+            "")
+                print -P "%F{red}❌ Course name can't be empty!%f"
+                ;;
+            *)
+                [[ -n ${courses[$course]} ]] && 
+                    print -P "%F{yellow}⚠️  Course already exists!%f" && continue
+                break
+                ;;
+        esac
+    done
+
+    while true; do
+        echo -n "🔧 Add praktikum to '${course}'? [y/N] "
+        read -k 1
+        echo
+        case $REPLY in
+            [Yy]) courses[$course]="yes"; break ;;
+            [Nn]|"") courses[$course]="no"; break ;;
+            *) print -P "%F{red}❌ Invalid choice!%f" ;;
+        esac
+    done
+done
+
+display_preview
+echo -n "🚀 Create directory structure? [Y/n] "
+read -k 1
+echo
+
+if [[ $REPLY =~ ^[Nn] ]]; then
+    print -P "%F{red}❌ Aborted! No directories created.%f"
+    exit 0
+fi
+
+mkdir -p "$base_dir"
+for course in "${(@k)courses}"; do
+    clean_course=${course// /_}
+    course_path="$base_dir/$clean_course"
+    mkdir -p "$course_path/skripte"
+    [[ ${courses[$course]} == "yes" ]] && mkdir -p "$course_path/praktika"
+done
+
+print -P "\n%F{green}✅ Successfully created:%f"
+ls --tree "$base_dir"

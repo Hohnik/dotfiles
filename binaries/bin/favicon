@@ -1,0 +1,20 @@
+#!/bin/sh
+
+path=$1
+
+convert ${path} -resize 32x32 favicon_32.png
+convert ${path} -resize 128x128 favicon_128.png
+convert ${path} -resize 180x180 favicon_180.png
+convert ${path} -resize 192x192 favicon_192.png
+convert ${path} -resize 196x196 favicon_196.png
+
+
+echo "
+#Copy this into your <head>:"
+echo "
+<link rel=\"icon\" href=\"%PUBLIC_URL%/favicon_32.png\" sizes=\"32x32\">
+<link rel=\"icon\" href=\"%PUBLIC_URL%/favicon_128.png\" sizes=\"128x128\">
+<link rel=\"icon\" href=\"%PUBLIC_URL%/favicon_192.png\" sizes=\"192x192\">
+<link rel=\"apple-touch-icon\" href=\"%PUBLIC_URL%/favicon_180.png\" sizes=\"180x180\">
+<link rel=\"shortcut icon\" sizes=\"196x196\" href=\"%PUBLIC_URL%/favicon_196.png\">
+"

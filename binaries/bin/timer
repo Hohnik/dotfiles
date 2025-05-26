@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+
+cd ~/bin/pomato
+
+echo -n "Worktime: "
+read time
+
+echo -n "Pausetime: "
+read pause
+
+python pomato.py -w $time -p $pause
