@@ -1,0 +1,137 @@
+format = "$username$hostname$directory$git_state$git_metrics$git_status$character"
+right_format = "$all"
+
+[line_break]
+disabled = true
+
+
+# ----- Specific Modules -----
+
+[hostname]
+ssh_only = true
+ssh_symbol = " "
+
+[directory]
+read_only = " 󰌾"
+truncate_to_repo = false
+truncation_symbol = "../"
+truncation_length = 2
+repo_root_style = "#588B83 bold"
+
+[git_branch]
+symbol = " "
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[git_commit]
+tag_symbol = '  '
+disabled = true
+
+[git_status]
+format = '([$conflicted](bold red))[$ahead_behind](cyan)([$stashed](bold yellow))([$deleted](bold red))([$renamed](bold yellow))([$modified](bold red))([$untracked](bold green))([$staged](bold green))'
+
+[docker_context]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[package]
+symbol = "󰏗 "
+disabled = true
+
+
+# ----- Languages & Libraries -----
+
+[python]
+format = '| [${symbol}${pyenv_prefix}(\($virtualenv\) )]($style)'
+symbol = " "
+pyenv_prefix = ""
+
+
+[java]
+symbol = " "
+format = "| [$symbol]($style)"
+
+[php]
+symbol = " "
+format = "| [$symbol]($style)"
+
+[swift]
+symbol = " "
+format = "| [$symbol]($style)"
+
+[zig]
+symbol = " "
+format = "| [$symbol]($style)"
+
+[lua]
+symbol = " "
+format = "| [$symbol]($style)"
+
+[nodejs]
+symbol = " "
+format = "| [$symbol]($style)"
+
+
+# ----- Tools -----
+
+[gradle]
+symbol = " "
+format = "| [$symbol]($style)"
+
+[conda]
+symbol = " "
+
+[meson]
+symbol = "󰔷 "
+
+
+# ----- OS -----
+
+[os.symbols]
+AlmaLinux = " "
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+Bluefin = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+RockyLinux = " "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Void = " "
+Unknown = " "
+Windows = "󰍲 "

@@ -1,5 +1,5 @@
 # ----- Plugins & Settings -----
-plugins=(macos git)
+plugins=(macos git tenv)
 
 
 # ----- Shell Settings -----
@@ -17,6 +17,7 @@ source <(carapace _carapace)
 
 
 # ----- Alias -----
+alias config='vim ~/.zshrc'
 alias showvim='vim $(fzf)'
 alias gs='git status --short'
 alias gl='git log --graph'
