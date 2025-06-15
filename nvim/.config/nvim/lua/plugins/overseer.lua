@@ -39,6 +39,11 @@ return {
         desc = 'Toggle task window',
       },
       {
+        '<leader>oo',
+        '<cmd>OverseerQuickAction<cr>',
+        desc = 'Show quick actions',
+      },
+      {
         '<leader>o<',
         function()
           local overseer = require 'overseer'

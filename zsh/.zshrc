@@ -1,9 +1,16 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # ----- Plugins & Settings -----
 plugins=(macos git tenv)
 
+# ----- p10k -----
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # ----- Shell Settings -----
 export ZSH="$HOME/.oh-my-zsh" # Path to your oh-my-zsh installation.
+export ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh
 zstyle ':completion:*' menu select
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -18,21 +25,17 @@ source <(carapace _carapace)
 
 # ----- Alias -----
 alias config='vim ~/.zshrc'
-alias showvim='vim $(fzf)'
 alias gs='git status --short'
 alias gl='git log --graph'
-alias ls='ls --color'
-alias tree='ls --tree'
 alias vim='nvim'
 alias lzg='lazygit'
 alias lzd='lazydocker'
-alias gitstats='git ls-files | xargs wc -l | column -t'
+alias gitstats="(git ls-files -z :/ | grep -z -v -e '^.gitignore$' -e '^README.md$' | xargs -0 wc -l | grep -v total | sort -n; git ls-files -z :/ | grep -z -v -e '^.gitignore$' -e '^README.md$' | xargs -0 wc -l | grep total) | column -t"
+alias format='ruff format'
 
 
 # ----- Path Variables -----
-# export PATH=/opt/homebrew/sbin:$PATH
-# export PATH=/opt/homebrew/bin:$PATH
-# export PATH="$PATH:/Users/niklas/.modular/bin"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 if [[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
@@ -104,4 +107,4 @@ function zi() {
     --prompt="Jump to directory > ")" && cd "$dir"
 }
 
-eval "$(starship init zsh)"
+venv
