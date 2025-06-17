@@ -1,32 +1,21 @@
 return {
-  { -- Autoformat
-    'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
-    keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
+  "stevearc/conform.nvim",
+  event = { "BufWritePre" }, -- Run on save
+  cmd = { "ConformInfo" },
+  opts = {
+    formatters_by_ft = {
+      python = { "ruff_format"},
+      lua = { "stylua" },
     },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        local disable_filetypes = { c = true, cpp = true }
-        return {
-          timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-        }
-      end,
-      formatters_by_ft = {
-        -- lua = { 'stylua' },
-        -- python = { 'isort', 'black' },
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
-      },
+
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
     },
   },
+  init = function()
+    vim.keymap.set({ "n", "v" }, "<leader>f", function()
+      require("conform").format({ async = true, lsp_fallback = true })
+    end, { desc = "Format buffer" })
+  end,
 }
